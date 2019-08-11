@@ -6,6 +6,8 @@ for (let i=0; i<ENTRIES; i++) {
         firstName: `${faker.name.firstName()}`,
         lastName: `${faker.name.lastName()}`,
         secondLastName: `${faker.name.lastName()}`,
+
+        age: `${faker.random.number({ min: 22, max: 60 })}`,
         
         jobArea: `${faker.name.jobArea()}`,
         jobDescriptor: `${faker.name.jobDescriptor()}`,
@@ -22,3 +24,7 @@ for (let i=0; i<ENTRIES; i++) {
 
     console.log(`${i} - ${JSON.stringify(fakeObj, undefined, 2)}`);
 }
+
+let value = faker.finance.transactionType();
+
+console.log(`value: ${JSON.stringify(value, undefined, 3)}`);
