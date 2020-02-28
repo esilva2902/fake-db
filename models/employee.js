@@ -25,6 +25,22 @@ let EmployeeSchema = new mongoose.Schema({
       minlength: 2,
       trim: true
     },
+    jobTitle: {
+      type: String,
+      required: true,
+      minlength: 2,
+      trim: true
+    },
+    jobArea: {
+      type: String,
+      required: true,
+      minlength: 2,
+      trim: true
+    },
+    hireDate: {
+      type: Date,
+      required: true
+    },
     gender: {
       type: String,
       required: true,
@@ -43,6 +59,12 @@ let EmployeeSchema = new mongoose.Schema({
     },
     phoneNumber: {
       type: String
+    },
+    country: {
+      type: String,
+      required: true,
+      minlength: 2,
+      trim: true
     },
     address: {
         type: mongoose.Schema.Types.Mixed,

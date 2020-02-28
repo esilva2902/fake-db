@@ -5,43 +5,75 @@ const { Employee } = require('../models/employee');
 
 class DAOEmployee {
   static async generateEmployees(totalEntries) {
-    let genra = ['F', 'M'];
+    let genra = ['F', 'F', 'F', 'M', 'F', 'M', 'M', 'M', 'F', 'M', 'F', 'M', 'F', 'F', 'M', 'F'];
+    let isActive = [false, false, false, true, false, true, true, true, false, true, false, true, false, false, true, false];
     // let providers = ['gmail', 'hotmail', 'outlook', 'yahoo'];
+
+    let country = '';
+    let pastYears = 0;
+    let fakeAge = 0;
 
     let entries = [ ];
 
     for (let i=0; i<totalEntries; i++) {
+      country = `${faker.address.country()}`; 
+      fakeAge = faker.random.number({ min: 22, max: 60 });
 
-        let employee = new Employee({ 
-            employeeId: `${faker.random.uuid()}`,
+      if (fakeAge < 25) {
+        pastYears = 1;
 
-            firstName: `${faker.name.firstName()}`,
-            lastName: `${faker.name.lastName()}`,
-            secondLastName: `${faker.name.lastName()}`,
+      } else  if (fakeAge >= 25 && fakeAge <= 30) {
+        pastYears = 3;
 
-            gender: genra[ faker.random.number({ min: 0, max: 1 }) ],
-            age: faker.random.number({ min: 22, max: 60 }),
+      } else  if (fakeAge >= 31 && fakeAge <= 40) {
+        pastYears = 8;
+        
+      } else  if (fakeAge >= 40 && fakeAge <= 50) {
+        pastYears = 10;
+        
+      } else  if (fakeAge >= 50) {
+        pastYears = 18;
+        
+      }
+      
+      let employee = new Employee({ 
+          employeeId: `${faker.random.uuid()}`,
 
-            email: `${faker.internet.email()}`,
-            phoneNumber: `${faker.phone.phoneNumber()}`,
+          firstName: `${faker.name.firstName()}`,
+          lastName: `${faker.name.lastName()}`,
+          secondLastName: `${faker.name.lastName()}`,
 
-            address: {
-                streetName: `${faker.address.streetName()}`,
-                externalNumber: faker.random.number({ min: 200, max: 999 }),
-                suburb: `${faker.random.word()}`,
-                city: `${faker.address.city()}`,
-                state: `${faker.address.state()}`,
-                country: `${faker.address.country()}`
-            },
+          jobTitle: `${faker.name.jobTitle()}`,
+          jobArea: `${faker.name.jobArea()}`,
 
-            active: true
-        });
+          hireDate: faker.date.past(pastYears),
 
-        entries.push(employee);
+          gender: genra[ faker.random.number({ min: 0, max: 15 }) ],
+          age: fakeAge,
 
-        // console.log(`${i} - ${JSON.stringify(fakeObj, undefined, 2)}`);
+          email: `${faker.internet.email()}`,
+          phoneNumber: `${faker.phone.phoneNumber()}`,
+
+          country: `${country}`,
+
+          address: {
+              streetName: `${faker.address.streetName()}`,
+              externalNumber: faker.random.number({ min: 200, max: 999 }),
+              suburb: `${faker.random.word()}`,
+              city: `${faker.address.city()}`,
+              state: `${faker.address.state()}`,
+              country: `${country}`
+          },
+
+          active: isActive[ faker.random.number({ min: 0, max: 15 }) ]
+      });
+
+      // console.log(`${i} - ${JSON.stringify(employee, undefined, 2)}`);
+
+      entries.push(employee);
     }
 
+    // return entries;
     return Employee.insertMany(entries);
   }
 }
