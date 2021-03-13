@@ -71,6 +71,15 @@ let EmployeeSchema = new mongoose.Schema({
         default: { },
         required: true
     },
+    productivity: {
+      type: Array,
+      default: [ ],
+      required: true
+    },
+    sales: {
+      type: Number,
+      required: true
+    },
     active: {
         type: Boolean,
         required: true

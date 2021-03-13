@@ -5,8 +5,8 @@ const { Employee } = require('../models/employee');
 
 class DAOEmployee {
   static async generateEmployees(totalEntries) {
-    let genra = ['F', 'F', 'F', 'M', 'F', 'M', 'M', 'M', 'F', 'M', 'F', 'M', 'F', 'F', 'M', 'F'];
-    let isActive = [false, false, false, true, false, true, true, true, false, true, false, true, false, false, true, false];
+    let genra = ['F', 'F', 'F', 'M', 'F', 'M', 'M', 'M', 'F', 'M', 'F', 'M', 'F', 'F', 'M', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F'];
+    let isActive = [false, false, false, true, false, true, true, true, false, true, false, true, false, false, true, false, false ,false ,false ,false];
     // let providers = ['gmail', 'hotmail', 'outlook', 'yahoo'];
 
     let country = '';
@@ -48,7 +48,7 @@ class DAOEmployee {
 
           hireDate: faker.date.past(pastYears),
 
-          gender: genra[ faker.random.number({ min: 0, max: 15 }) ],
+          gender: genra[ faker.random.number({ min: 0, max: 24 }) ],
           age: fakeAge,
 
           email: `${faker.internet.email()}`,
@@ -65,7 +65,24 @@ class DAOEmployee {
               country: `${country}`
           },
 
-          active: isActive[ faker.random.number({ min: 0, max: 15 }) ]
+          productivity: [ 
+            faker.random.number({ min: 1, max: 25 }),
+            faker.random.number({ min: 1, max: 25 }),
+            faker.random.number({ min: 1, max: 25 }),
+            faker.random.number({ min: 1, max: 25 }),
+            faker.random.number({ min: 1, max: 25 }),
+            faker.random.number({ min: 1, max: 25 }),
+            faker.random.number({ min: 1, max: 25 }),
+            faker.random.number({ min: 1, max: 25 }),
+            faker.random.number({ min: 1, max: 25 }),
+            faker.random.number({ min: 1, max: 25 }),
+            faker.random.number({ min: 1, max: 25 }),
+            faker.random.number({ min: 1, max: 25 }),
+          ],
+
+          sales: faker.finance.amount(250000, 1500000, 6),
+
+          active: isActive[ faker.random.number({ min: 0, max: 19 }) ]
       });
 
       // console.log(`${i} - ${JSON.stringify(employee, undefined, 2)}`);

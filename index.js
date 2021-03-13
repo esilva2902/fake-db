@@ -8,7 +8,8 @@ Promise.resolve().then(() => {
     return DAOEmployee.generateEmployees(ENTRIES);
 
 }).then(insertedEmployees => {
-    console.log(`${JSON.stringify(insertedEmployees, undefined, 2)}`);
+    // console.log(`${JSON.stringify(insertedEmployees, undefined, 2)}`);
+    console.log(`Fake db was created...`);
 });
 
 
